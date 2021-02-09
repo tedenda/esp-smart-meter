@@ -4,18 +4,21 @@
 #include <LittleFS.h>
 #include <ArduinoJson.h>
 #include <ArduinoOTA.h>
+#include <SoftwareSerial.h>
 #include "HanReader.h"
 #include "web/AmsWebServer.h"
 #include "hw/chipSetup.h"
 
 AmsWebServer webServer;
-HanReader hanReader(&Serial);
+HanReader hanReader(&swSer1);
 
-
+SoftwareSerial swSer1;
 
 void setup() {
   Serial.setRxBufferSize(DLMS_READER_BUFFER_SIZE);     
   Serial.begin(115200);
+
+  swSer1.begin(115200, SWSERIAL_8N1, D5, D6, false, DLMS_READER_BUFFER_SIZE);
 
   pinMode(TRIGGER_PIN, INPUT);      
   pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
