@@ -9,10 +9,10 @@
 #include "web/AmsWebServer.h"
 #include "hw/chipSetup.h"
 
+SoftwareSerial swSer1;
+
 AmsWebServer webServer;
 HanReader hanReader(&swSer1);
-
-SoftwareSerial swSer1;
 
 void setup() {
   Serial.setRxBufferSize(DLMS_READER_BUFFER_SIZE);     
